@@ -11,7 +11,7 @@ export default function Signup() {
     const { signup } = useAuth();
     const [error, setError] = useState("");
     const [loading, setLoading] = useState(false);
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     async function handleSubmit(e) {
         e.preventDefault();
@@ -24,8 +24,9 @@ export default function Signup() {
             setError("");
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
-            history.push();
-        } catch {
+            navigate("/");
+        } catch (err) {
+            console.error(err);
             setError("Failed to create an account");
         }
 
@@ -45,14 +46,14 @@ export default function Signup() {
                         </Form.Group>
                         <Form.Group id="password">
                             <Form.Label>Password</Form.Label>
-                            <Form.Control type="email" ref={emailRef} required />
+                            <Form.Control type="password" ref={passwordRef} required />
                         </Form.Group>
                         <Form.Group id="password-confirm">
                             <Form.Label>Password Confirmation</Form.Label>
-                            <Form.Control type="email" ref={passwordConfirmRef} required />
+                            <Form.Control type="password" ref={passwordConfirmRef} required />
                         </Form.Group>
                         <Button disabled={loading} className="w-100" type="submit">
-                            Sign Up
+                            {loading ? "Signing Up..." : "Sign Up"}
                         </Button>
                     </Form>
                 </Card.Body>

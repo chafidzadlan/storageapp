@@ -34,7 +34,7 @@ export default function FolderBreadcrumbs({ currentFolder }) {
                     style={{  maxWidth: "200px" }}
                     active
                 >
-                    {currentFolder.Item}
+                    {currentFolder.name}
                 </Breadcrumb.Item>
             )}
         </Breadcrumb>

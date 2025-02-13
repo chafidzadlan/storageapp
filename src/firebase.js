@@ -14,10 +14,7 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-
-const auth = getAuth(app);
 const firestore = getFirestore(app);
-const storage = getStorage(app);
 
 export const database = {
   folders: collection(firestore, "folders"),
@@ -28,5 +25,6 @@ export const database = {
   getCurrentTimestamp: serverTimestamp,
 };
 
-export { auth, storage };
+export const storage = getStorage(app);
+export const auth = getAuth(app);
 export default app;
