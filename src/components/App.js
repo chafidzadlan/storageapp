@@ -1,14 +1,19 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Login from "./authentication/Login";
+import PrivateRoute from "./authentication/PrivateRoute";
+import Dashboard from "./google-drive/Dashboard";
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
-        <Route path="/" />
+        <PrivateRoute exact path="/" component={Dashboard} />
+
+        <Route path="/login" component={Login} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
