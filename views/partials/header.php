@@ -9,7 +9,8 @@
     <link rel="icon" type="image/png" href="img/dummy.jpg">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="css/bootstrap/boostrap.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="css/sweetalert2/sweetalert2.dark.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
 

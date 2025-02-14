@@ -1,0 +1,19 @@
+.navbar {
+    background-color: hsla(225, 4%, 20%, 1) !important;
+}
+
+.hero {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+.hero.h1 {
+    text-align: center;
+    line-height: 1.5;
+}
+
+.bg-dark {
+    background-color: #31363c !important;
+    color: white !important;
+  }
