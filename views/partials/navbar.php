@@ -19,11 +19,11 @@
                             </button>
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-item" href="profile.php">Profile</a></li>
-                                <li><a class="dropdown-item" href="logout">Logout</a></li>
+                                <li><a class="dropdown-item" href="logout.php">Logout</a></li>
                             </ul>
                         </div>
                     <?php } else { ?>
-                        <a class="nav-link btn btn-dark" href="login"><i class="bi bi-box-arrow-in-right"></i> Login</a>
+                        <a class="nav-link btn btn-dark" href="login.php"><i class="bi bi-box-arrow-in-right"></i> Login</a>
                     <?php } ?>
                 </li>
             </ul>
