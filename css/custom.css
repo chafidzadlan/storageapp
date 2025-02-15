@@ -1,7 +1,7 @@
 ::-webkit-scrollbar {
     width: 3px;
 }
-:-webkit-scrollbar-track {
+::-webkit-scrollbar-track {
     box-shadow: inset 0 0 5px #202124;
     border-radius: 10px;
 }
@@ -9,12 +9,13 @@
     background: #f8f9fa;
     border-radius: 20px;
 }
-  
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700&display=swap");
 
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700&display=swap");
+  
 body {
     font-family: "Montserrat", sans-serif;
 }
+  
 a {
     text-decoration: none !important;
     color: white;
@@ -35,6 +36,23 @@ a {
     line-height: 1.5;
 }
 
+.shadow-box {
+    box-shadow: 8px 9px white;
+} 
+.shadow-box:hover {
+    box-shadow: 8px 9px black;
+}
+
+.alert,
+.toast {
+    color: white !important;
+}
+.card-img-overlay {
+    background: rgb(33 37 41 / 50%);
+}
+.fs-alt-1 {
+    font-size: 4rem;
+}
 .pt-5 {
     padding-top: 5rem !important;
 }
@@ -52,17 +70,51 @@ a {
     background-color: #31363c !important;
     color: white !important;
 }
+.btn-dark2 {
+    background-color: #31363c !important;
+    color: white !important;
+}
 .bg-danger {
     background-color: #ff3333 !important;
     color: white !important;
 }
-
+  
+.card-message {
+    height: 50vh;
+}
+.card-search-index {
+    max-height: 40vh;
+    z-index: 2;
+}
+  
 .h-60-vh {
     height: 60vh !important;
 }
-
+  
+.placeholder,
+.placeholder i {
+    color: transparent !important;
+}
+.placeholder {
+    background-color: white !important;
+    display: block !important;
+}
+  
+.form-control:disabled,
+select:disabled {
+    opacity: 0.4 !important;
+}
+  
+.placeholder-card-img {
+    height: 140px !important;
+}
+  
 @media (max-width: 768px) {
     .login-area-card {
+      width: 100% !important;
+    }
+  
+    .card-search-index {
       width: 100% !important;
     }
 }

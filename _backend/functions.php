@@ -57,7 +57,7 @@ function signup($data, $gambar) {
     }
 
     $newPassword = password_hash($password1, PASSWORD_DEFAULT);
-    $query = "INSERT INTO users VALUES(null, '$username', '$newPassword', '$gambar', 1)";
+    $query = "INSERT INTO users VALUES(null, '$username', '$newPassword', '$gambar', 2)";
     mysqli_query($db, $query);
 
     return [
@@ -72,17 +72,17 @@ function login($data) {
     $username = htmlspecialchars($data['username']);
     $password = mysqli_real_escape_string($db, $data['password']);
 
-    if ($query = query("SELECT users.id_users, users.username, users.password, roles.jenis FROM users, roles WHERE users.id_role = roles.id_role AND users.username= '$username'")) {
+    if ($query = query("SELECT users.id_user, users.username, users.password, roles.jenis FROM users, roles WHERE users.id_role = roles.id_role AND users.username= '$username'")) {
         $query = $query[0];
 
         if (password_verify($password, $query['password'])) {
-            $_SESSION['ids'] = $query['id_users'];
+            $_SESSION['idu'] = $query['id_user'];
             $_SESSION['login'] = true;
         }
 
         if (isset($data['remember'])) {
-            setcookie('id', $query['id_users'], time() + 2678400);
-            setcookie('uid', hash('sha256', $query['username']), time() + 2678400);
+            setcookie('id', $query['id_user'], time() + 2678400);
+            setcookie('idu', hash('sha256', $query['username']), time() + 2678400);
         }
 
         if ($query['jenis'] === "Admin") {
@@ -103,21 +103,21 @@ function login($data) {
 }
 
 function cekUser($data) {
-    return query("SELECT username, id_users FROM users WHERE id_users = '$data'")[0];
+    return query("SELECT username, id_user FROM users WHERE id_user = '$data'")[0];
 }
 
 function cookie($data)
 {
     $db = dbConn();
     $id = $data['id'];
-    $uid = $data['uid'];
+    $idu = $data['idu'];
 
-    $q = mysqli_query($db, "SELECT users.id_users, users.username, roles.jenis FROM users, roles WHERE users.id_role = roles.id_role AND users.id_users = '$id'");
+    $q = mysqli_query($db, "SELECT users.id_user, users.username, roles.jenis FROM users, roles WHERE users.id_role = roles.id_role AND users.id_user = '$id'");
     $result = mysqli_fetch_assoc($q);
     // cookie dan username
-    if ($uid === hash('sha256', $result['username'])) {
+    if ($idu === hash('sha256', $result['username'])) {
         $_SESSION['login'] = true;
-        $_SESSION['ids'] = $result['id_users'];
+        $_SESSION['idu'] = $result['id_user'];
         if ($result['jenis'] === "Admin") {
 
             $_SESSION['rls'] = "a";
@@ -134,14 +134,14 @@ function cookie($data)
 function cookieOpt($data) {
     $db = dbConn();
     $id = $data['id'];
-    $uid = $data['uid'];
+    $idu = $data['idu'];
 
-    $q = mysqli_query($db, "SELECT users.id_users, users.username, roles.jenis FROM users, roles WHERE users.id_role = roles.id_role AND users.id_users = '$id'");
+    $q = mysqli_query($db, "SELECT users.id_user, users.username, roles.jenis FROM users, roles WHERE users.id_role = roles.id_role AND users.id_user = '$id'");
     $result = mysqli_fetch_assoc($q);
 
-    if ($uid === hash('sha256', $result['username'])) {
+    if ($idu === hash('sha256', $result['username'])) {
         $_SESSION['login'] = true;
-        $_SESSION['ids'] = $result['id_users'];
+        $_SESSION['idu'] = $result['id_user'];
         if ($result['jenis'] === "Admin") {
             $_SESSION['rls'] = "a";
         } else {
@@ -151,6 +151,25 @@ function cookieOpt($data) {
         exit();
     }
     return false;
+}
+
+function createFolder($data, $gambar) {
+    $db = dbConn();
+
+    $uid = $_SESSION['idu'];
+    $name = htmlspecialchars($data['name']);
+
+    if(empty($gambar)) {
+        $gambar = 'folder.svg';
+    }
+
+    $query = "INSERT INTO folders VALUES(null, null, '$name', NOW(), '$uid')";
+    mysqli_query($db, $query);
+
+    return [
+        'error' => false,
+        'message' => "Berhasil",
+    ];
 }
 
 ?>

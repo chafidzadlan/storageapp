@@ -4,11 +4,11 @@ session_start();
 
 require '_backend/functions.php';
 
-if (isset($_COOKIE['id']) && isset($_COOKIE['uid'])) {
+if (isset($_COOKIE['id']) && isset($_COOKIE['idu'])) {
     cookie($_COOKIE);
 }
 
-if (isset($_SESSION['login']) && isset($_SESSION['ids']) && isset($_SESSION['rls'])) {
+if (isset($_SESSION['login']) && isset($_SESSION['idu']) && isset($_SESSION['rls'])) {
     header("Location: dashboard.php");
     exit();
 }
