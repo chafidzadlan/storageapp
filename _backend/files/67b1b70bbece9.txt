@@ -1,0 +1,29 @@
+MYSQL
+id : root	
+pw : root
+
+=======================================
+GMAIL
+id : chafidzadlan05@gmail.com
+pw : akuganteng919
+
+id : chafidz.223040041@mail.unpas.ac.id
+pw : akuganteng919
+
+=======================================
+GITHUB
+id : chafidz05
+pw : akuganteng919
+
+id : chafidzadlan
+pw : akuganteng919
+
+=======================================
+UBUNTU
+id : xyxy
+pw : xyxy
+
+=======================================
+GIT UNPAS
+id : adlan
+pw : adlan

@@ -172,4 +172,79 @@ function createFolder($data, $gambar) {
     ];
 }
 
+function createFile($id) {
+    $db = dbConn();
+    $idu = $_SESSION['idu'];
+
+    if (!isset($_SESSION['idu'])) {
+        return [
+            'error' => true,
+            'message' => "User not logged in.",
+        ];
+    }
+
+    $name = $_FILES['file']['name'];
+    $type = $_FILES['file']['type'];
+    $size = $_FILES['file']['size'];
+    $temp = $_FILES['file']['tmp_name'];
+
+    $allowedExtensions = ['pdf', 'jpg', 'jpeg', 'png', 'doc', 'docx', 'txt'];
+
+    $extension = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+
+    if (!in_array($extension, $allowedExtensions)) {
+        return [
+            'error' => true,
+            'message' => "File type not allowed.",
+        ];
+    }
+
+    $newName = uniqid() . '.' . $extension;
+
+    $uploadDir = 'files/';
+    if (!is_dir($uploadDir)) {
+        if(!mkdir($uploadDir, 0777, true)) {
+            return [
+                'error' => true,
+                'message' => "Failed to create upload directory.",
+            ];
+        }
+    }
+
+    $filePath = $uploadDir . $newName;
+
+    if (!move_uploaded_file($temp, $filePath)) {
+        return [
+            'error' => true,
+            'message' => "Failed to move uploaded file.",
+        ];
+    }
+
+    $query = "INSERT INTO files (id_file, file, path, size, type, created_at, id_user, id_folder) VALUES (null, ?, ?, ?, ?, NOW(), ?, ?)";
+
+    $stmt = $db->prepare($query);
+
+    if (!$stmt) {
+        return [
+            'error' => true,
+            'message' => "Database error: " . $db->error,
+        ];
+    }
+
+    $stmt->bind_param("ssisii", $name, $filePath, $size, $type, $idu, $id);
+
+    if ($stmt->execute()) {
+        return [
+            'error' => false,
+            'message' => "File uploaded and saved successfully!",
+        ];
+    } else {
+        return [
+            'error' => true,
+            'message' => "Failed to save file information to database: " . $stmt->error,
+        ];
+    }
+
+}
+
 ?>

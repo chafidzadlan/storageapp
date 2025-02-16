@@ -20,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;600;700&display=swap" rel="stylesheet">
 
     <!-- JS -->
+    <script src="js/custom.js"></script>
     <script src="js/bootstrap/bootstrap.bundle.min.js"></script>
     <script src="js/sweetalert2/sweetalert2.min.js"></script>
     <script src="js/jquery/jquery-3.6.4.min.js"></script>
